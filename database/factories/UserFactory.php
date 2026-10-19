@@ -28,8 +28,24 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'role' => \App\Models\User::ROLE_STUDENT,
+            'phone' => fake()->numerify('+92 3## ### ####'),
             'remember_token' => Str::random(10),
         ];
+    }
+
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => \App\Models\User::ROLE_ADMIN,
+        ]);
+    }
+
+    public function student(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => \App\Models\User::ROLE_STUDENT,
+        ]);
     }
 
     /**

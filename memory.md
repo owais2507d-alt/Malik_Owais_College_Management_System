@@ -7,8 +7,8 @@
 
 ## Current Status
 
-- **Phase:** 1 — Database layer (migrations + models + seeders)
-- **Next:** event_categories / events / event_registrations migrations, Eloquent models, factories + seeders
+- **Phase:** 2 — Auth + role middleware
+- **Next:** login/register/logout controllers + views, `EnsureAdmin`/`EnsureStudent` middleware, route groups
 
 ## Stack Decisions (locked)
 
@@ -43,10 +43,15 @@
 - [x] `alpinejs@3` installed; `app.js` boots Alpine
 - [x] Design system in `resources/css/app.css`: brand scale, sidebar/status colors, `.gradient-spectrum`, `.text-spectrum`, btn/input/badge/card utilities
 - [x] `npm run build` green (fixed: Tailwind v4 requires `@utility` not plain `@apply` for reusable classes)
+- [x] Migrations: users+role/phone/avatar, event_categories, events (slug, soft deletes), event_registrations (unique user+event)
+- [x] Models: User (role helpers), EventCategory, Event (scopes, seats, deadlines), EventRegistration (+cancellable)
+- [x] Factories for all 4 models; DatabaseSeeder: admin@fiesta.edu/password, 15 students, 6 categories, 12 events, 160 registrations
+- [x] Demo states seeded: workshop FULL (10/10), masterclass DEADLINE PASSED — verified via SQL
+- [x] `migrate:fresh --seed` green on MySQL
 
 ## In Progress
 
-- Phase 1: Database layer — migrations, models, seeders
+- Phase 2: Auth + role middleware
 
 ## Known Issues / Notes
 
@@ -56,3 +61,5 @@
 - Docs conflict: tech.md mentions Livewire/Redis — NOT used (user chose Blade+Alpine, database cache/queue/session)
 - Repo URL not yet provided by user — remote not added; commit locally and push once URL arrives
 - Tailwind v4 gotcha: reusable classes must be `@utility` (plain `.class` in components cannot be `@apply`-ed elsewhere)
+- Windows PS gotcha: `php artisan tinker --execute` breaks with quotes/`$vars` — verify data with `mysql.exe -e "SQL"` instead
+- PHP closures don't auto-capture vars — use `use ($var)` or arrow `fn()` in seeders/collections
