@@ -7,8 +7,8 @@
 
 ## Current Status
 
-- **Phase:** 2 — Auth + role middleware
-- **Next:** login/register/logout controllers + views, `EnsureAdmin`/`EnsureStudent` middleware, route groups
+- **Phase:** 3a — Public site (home landing, browse/search events, event details)
+- **Next:** layouts/app navbar+footer, HomeController stats/highlights, EventController index/show, toast flash partial
 
 ## Stack Decisions (locked)
 
@@ -48,10 +48,15 @@
 - [x] Factories for all 4 models; DatabaseSeeder: admin@fiesta.edu/password, 15 students, 6 categories, 12 events, 160 registrations
 - [x] Demo states seeded: workshop FULL (10/10), masterclass DEADLINE PASSED — verified via SQL
 - [x] `migrate:fresh --seed` green on MySQL
+- [x] Middleware EnsureAdmin/EnsureStudent (abort 403) aliased as `admin`/`student` in bootstrap/app.php
+- [x] Auth: LoginController (RateLimiter 5-attempt throttle, session regenerate, role-aware redirect), RegisterController (always role=student), logout
+- [x] `layouts/guest.blade.php` (spectrum split-screen) + styled login/register with Alpine password toggles
+- [x] Smoke-tested live on :8000 — wrong password shows error, admin login → /, guest pages redirect when authed, register creates student row
+- [x] HOME route `/` = HomeController (placeholder view, to be replaced in 3a)
 
 ## In Progress
 
-- Phase 2: Auth + role middleware
+- Phase 3a: Public site — app layout, landing page, event browse/search, event details
 
 ## Known Issues / Notes
 
@@ -63,3 +68,5 @@
 - Tailwind v4 gotcha: reusable classes must be `@utility` (plain `.class` in components cannot be `@apply`-ed elsewhere)
 - Windows PS gotcha: `php artisan tinker --execute` breaks with quotes/`$vars` — verify data with `mysql.exe -e "SQL"` instead
 - PHP closures don't auto-capture vars — use `use ($var)` or arrow `fn()` in seeders/collections
+- `RateLimiter::throttleKey()` does NOT exist — build key manually (`'login:'.sha1(email.'|'.ip)`)
+- PS5.1: `Invoke-WebRequest -MaximumRedirection 0` throws opaque exceptions — test flows by FOLLOWING redirects and reading final ResponseUri
