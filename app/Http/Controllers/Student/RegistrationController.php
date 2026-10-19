@@ -11,6 +11,33 @@ use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
+    public function index(Request $request)
+    {
+        $user = $request->user();
+
+        $status = $request->query('status');
+        $status = in_array($status, [
+            EventRegistration::STATUS_PENDING,
+            EventRegistration::STATUS_APPROVED,
+            EventRegistration::STATUS_REJECTED,
+            EventRegistration::STATUS_CANCELLED,
+        ], true) ? $status : null;
+
+        $counts = $user->registrations()
+            ->selectRaw('status, count(*) as total')
+            ->groupBy('status')
+            ->pluck('total');
+
+        $registrations = $user->registrations()
+            ->with('event.category')
+            ->when($status, fn ($query) => $query->where('status', $status))
+            ->orderByDesc('registered_at')
+            ->paginate(8)
+            ->withQueryString();
+
+        return view('student.registrations', compact('registrations', 'status', 'counts'));
+    }
+
     public function store(Request $request, Event $event): RedirectResponse
     {
         $user = $request->user();

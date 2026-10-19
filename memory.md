@@ -7,8 +7,8 @@
 
 ## Current Status
 
-- **Phase:** 3b — Student panel (dashboard, my registrations page, profile)
-- **Next:** Student\DashboardController, Student\RegistrationController@index, ProfileController, views, routes in `student.*` group
+- **Phase:** 3c — Admin panel (dashboard, events CRUD + image upload, categories, approvals, participants)
+- **Next:** `layouts/admin.blade.php` sidebar shell, Admin\* controllers, FormRequests, admin views, routes under `admin.` prefix
 
 ## Stack Decisions (locked)
 
@@ -59,10 +59,14 @@
 - [x] `partials/event-card.blade.php` shared component (category gradient, status/seat badges)
 - [x] Registration store/cancel: capacity → deadline → status → duplicate checks, unique-violation catch, cancel→pending re-register
 - [x] LIVE-VERIFIED: search/status/category filters, register toast, duplicate blocked, full blocked, deadline blocked, cancel toast, re-register "Welcome back"
+- [x] Student panel: DashboardController (4 stats + next events + recent), RegistrationController@index (status pills + counts), ProfileController (details + separate password endpoint)
+- [x] `partials/student-nav.blade.php` pill tabs; views: student/dashboard, student/registrations (rows + inline cancel confirm), student/profile
+- [x] LIVE-VERIFIED: student login → /student/dashboard, all pages 200, profile toast, wrong-pw blocked, password change OK, **admin → student routes = 403**
+- NOTE: test.student password is now `newpassword123` (was changed during testing); other seed users use `password`
 
 ## In Progress
 
-- Phase 3b: Student panel — dashboard, registrations list, profile
+- Phase 3c: Admin panel — layout, dashboard, event/category CRUD, approvals, participants
 
 ## Known Issues / Notes
 
@@ -80,3 +84,5 @@
 - `Str::word` doesn't exist → use `Str::words($value, $n, $end)`
 - CSRF token rotates after login (session regenerate) — always re-scrape `_token` from a page fetched AFTER auth
 - Flash messages live one request: POST response holds them; re-fetching the page consumes them — assert on the POST's own response body
+- PS5.1 re-sends PUT on 302 → fake "too many redirects" loop; use curl POST + `_method=PUT` (browser-style) for form tests — that path is what the app actually uses
+- Two forms on one page both need their own `_token` scrape (values match) — or scrape the FIRST match
