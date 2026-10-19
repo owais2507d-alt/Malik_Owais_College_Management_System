@@ -63,10 +63,25 @@
 - [x] `partials/student-nav.blade.php` pill tabs; views: student/dashboard, student/registrations (rows + inline cancel confirm), student/profile
 - [x] LIVE-VERIFIED: student login → /student/dashboard, all pages 200, profile toast, wrong-pw blocked, password change OK, **admin → student routes = 403**
 - NOTE: test.student password is now `newpassword123` (was changed during testing); other seed users use `password`
+- [x] `layouts/admin.blade.php`: dark sidebar (logo, nav, pending-reg badge), topbar (search-less, avatar dropdown), mobile drawer, breadcrumbs slot
+- [x] Admin: DashboardController (4 stats + capacity watchlist + pending approvals), EventController resource CRUD (unique slug, image store/delete, `_remove_image`), CategoryController (destroy guarded when active events exist), RegistrationController (index filters + approve/reject + participants by event, MySQL FIELD status ordering)
+- [x] FormRequests StoreEventRequest/UpdateEventRequest (deadline ≥ event_date, start < end, image mimes ≤2MB)
+- [x] Views: admin/dashboard, admin/events/{index,form,participants}, admin/categories/index (Alpine create/edit/delete modals + error banner), admin/registrations/index (status tabs, filter form, Alpine decision confirm)
+- [x] LIVE-VERIFIED all admin pages 200; event create WITH image upload (file on disk + DB row + toast); invalid POST shows deadline/end-time errors; edit toast; category create/update/delete toasts; approve (302→approved) + reject (302→rejected); soft-delete event sets deleted_at AND removes image file
+- [x] SECURITY LIVE-VERIFIED: student → all /admin routes = 403, guest /admin = 302 login, soft-deleted event public page = 404, unknown admin route = 404
+- [x] `php artisan storage:link` done; all `h-4.5 w-4.5 h-5 w-5` duplicates fixed
+- [x] `npm run build` green (104.6 kB css / 107.4 kB js); `php vendor/bin/pint` auto-fixed 14 files; `php artisan test` 2 passed; / and /admin still 200 after pint
+- Phase 3c COMPLETE — commit as "feat: phase 3c admin panel"
 
 ## In Progress
 
-- Phase 3c: Admin panel — layout, dashboard, event/category CRUD, approvals, participants
+- (none — 3c done, awaiting commit)
+
+## Next Up
+
+1. Phase 4: theme polish (event detail/gallery polish, consistency pass) + styled error pages 403/404/500
+2. Phase 5: `events:update-status` scheduled command (routes/console.php), feature tests (auth, register/cancel rules, admin guards, CRUD), pint --test, build
+3. Phase 6: `migrate:fresh --seed` final verify, then ask user for GitHub repo URL → `git remote add origin` + push main
 
 ## Known Issues / Notes
 

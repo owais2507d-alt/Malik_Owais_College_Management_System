@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Models\EventRegistration;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 

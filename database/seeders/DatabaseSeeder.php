@@ -7,7 +7,9 @@ use App\Models\EventCategory;
 use App\Models\EventRegistration;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -43,10 +45,10 @@ class DatabaseSeeder extends Seeder
     }
 
     /**
-     * @param  \Illuminate\Support\Collection<int, EventCategory>  $categories
-     * @return \Illuminate\Support\Collection<int, Event>
+     * @param  Collection<int, EventCategory>  $categories
+     * @return Collection<int, Event>
      */
-    private function seedEvents($categories): \Illuminate\Support\Collection
+    private function seedEvents($categories): Collection
     {
         $definitions = [
             [
@@ -59,7 +61,7 @@ class DatabaseSeeder extends Seeder
                 'deadline_days' => 9,
                 'capacity' => 300,
                 'status' => Event::STATUS_UPCOMING,
-                'description' => "The grand opening of International Fiesta 2026 — \"Voices Unmuted: The Spectrum\". Expect a parade of cultures, a keynote from our chief guest, and the official lighting of the spectrum lantern.",
+                'description' => 'The grand opening of International Fiesta 2026 — "Voices Unmuted: The Spectrum". Expect a parade of cultures, a keynote from our chief guest, and the official lighting of the spectrum lantern.',
             ],
             [
                 'title' => 'Spectrum Hackathon',
@@ -200,7 +202,7 @@ class DatabaseSeeder extends Seeder
             $date = now()->addDays($def['days'])->format('Y-m-d');
 
             return Event::updateOrCreate(
-                ['slug' => \Illuminate\Support\Str::slug($def['title'])],
+                ['slug' => Str::slug($def['title'])],
                 [
                     'category_id' => $category?->id ?? $categories->first()?->id,
                     'title' => $def['title'],
@@ -219,8 +221,8 @@ class DatabaseSeeder extends Seeder
     }
 
     /**
-     * @param  \Illuminate\Support\Collection<int, User>  $students
-     * @param  \Illuminate\Support\Collection<int, Event>  $events
+     * @param  Collection<int, User>  $students
+     * @param  Collection<int, Event>  $events
      */
     private function seedRegistrations($students, $events): void
     {

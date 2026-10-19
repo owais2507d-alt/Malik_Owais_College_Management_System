@@ -6,7 +6,7 @@ use App\Models\EventCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\EventCategory>
+ * @extends Factory<EventCategory>
  */
 class EventCategoryFactory extends Factory
 {

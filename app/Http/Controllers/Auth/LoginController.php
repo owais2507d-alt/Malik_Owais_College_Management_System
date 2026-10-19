@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -63,11 +64,11 @@ class LoginController extends Controller
 
     private function homeFor(User $user): string
     {
-        if ($user->isAdmin() && \Illuminate\Support\Facades\Route::has('admin.dashboard')) {
+        if ($user->isAdmin() && Route::has('admin.dashboard')) {
             return route('admin.dashboard');
         }
 
-        if ($user->isStudent() && \Illuminate\Support\Facades\Route::has('student.dashboard')) {
+        if ($user->isStudent() && Route::has('student.dashboard')) {
             return route('student.dashboard');
         }
 
