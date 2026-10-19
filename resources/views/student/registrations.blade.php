@@ -9,7 +9,7 @@
     <div>
         <p class="text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-400">Student panel</p>
         <h1 class="mt-1 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">My registrations</h1>
-        <p class="mt-1 text-slate-500 dark:text-slate-400 dark:text-slate-500">Track approval status and cancel events you can no longer attend.</p>
+        <p class="mt-1 text-slate-500 dark:text-slate-400">Track approval status and cancel events you can no longer attend.</p>
     </div>
 
     {{-- Status pills --}}
@@ -41,7 +41,7 @@
             <h2 class="mt-4 text-lg font-semibold text-slate-900 dark:text-white">
                 {{ $status ? 'No '.ucfirst($status).' registrations' : 'No registrations yet' }}
             </h2>
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
                 {{ $status ? 'Try another filter to see your other registrations.' : 'Explore the calendar and claim your first seat.' }}
             </p>
             <a href="{{ route('events.index') }}" class="btn-primary mt-5 inline-flex">Explore events</a>
@@ -64,7 +64,7 @@
                                 </a>
                                 <span class="badge-{{ $registration->status }}">{{ ucfirst($registration->status) }}</span>
                             </div>
-                            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">
+                            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
                                 @if ($event)
                                     {{ $event->event_date->format('D, M j, Y') }} ·
                                     {{ \Illuminate\Support\Carbon::parse($event->start_time)->format('g:i A') }} ·
@@ -86,7 +86,7 @@
                                 </button>
                                 <div x-show="confirming" x-cloak x-transition class="flex items-center gap-2 rounded-lg bg-rejected-50 px-3 py-1.5">
                                     <span class="text-xs font-medium text-rejected-600 dark:text-red-300">Sure?</span>
-                                    <button type="button" @click="confirming = false" class="text-xs font-semibold text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200">No</button>
+                                    <button type="button" @click="confirming = false" class="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200">No</button>
                                     <form method="POST" action="{{ route('student.registrations.cancel', $registration) }}">
                                         @csrf
                                         <button type="submit" class="text-xs font-bold text-rejected-600 dark:text-red-300 hover:underline">Yes, cancel</button>

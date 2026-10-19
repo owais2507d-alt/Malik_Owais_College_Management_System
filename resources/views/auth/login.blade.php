@@ -5,7 +5,7 @@
 @section('content')
 <div>
     <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Welcome back</h1>
-    <p class="mt-1.5 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-400">Sign in to browse events and manage your registrations.</p>
+    <p class="mt-1.5 text-sm text-slate-500 dark:text-slate-400">Sign in to browse events and manage your registrations.</p>
 
     @if (session('status'))
         <div class="mt-5 rounded-lg border border-approved-500/30 bg-approved-50 px-4 py-3 text-sm text-approved-600 dark:border-approved-500/30 dark:bg-approved-500/10 dark:text-emerald-300">

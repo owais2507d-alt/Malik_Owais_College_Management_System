@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\EventCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class CategoryController extends Controller
 {
@@ -28,6 +29,8 @@ class CategoryController extends Controller
 
         EventCategory::create($data);
 
+        Cache::forget('fiesta.home.stats');
+
         return back()->with('status', 'Category created successfully.');
     }
 
@@ -40,6 +43,8 @@ class CategoryController extends Controller
 
         $category->update($data);
 
+        Cache::forget('fiesta.home.stats');
+
         return back()->with('status', 'Category updated successfully.');
     }
 
@@ -50,6 +55,8 @@ class CategoryController extends Controller
         }
 
         $category->delete();
+
+        Cache::forget('fiesta.home.stats');
 
         return back()->with('status', 'Category deleted successfully.');
     }

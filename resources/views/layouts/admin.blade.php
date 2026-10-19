@@ -7,6 +7,7 @@
 
     <title>@yield('page_title', 'Admin') · {{ config('app.name') }}</title>
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <script>document.documentElement.classList.remove('dark');</script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,7 +61,7 @@
                    class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition {{ request()->routeIs('admin.registrations.*') ? 'bg-sidebar-active text-white shadow-sm' : 'text-white/60 hover:bg-sidebar-light hover:text-white' }}">
                     <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     Registrations
-                    @php $pendingCount = \App\Models\EventRegistration::pending()->count(); @endphp
+                    @php $pendingCount = (int) Cache::remember('fiesta.admin.pending', now()->addSeconds(30), fn () => \App\Models\EventRegistration::pending()->count()); @endphp
                     @if ($pendingCount > 0)
                         <span class="ml-auto rounded-full bg-amber-500 px-2 py-0.5 text-[11px] font-bold text-white">{{ $pendingCount }}</span>
                     @endif
@@ -69,7 +70,7 @@
                    class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition {{ request()->routeIs('admin.messages.*') ? 'bg-sidebar-active text-white shadow-sm' : 'text-white/60 hover:bg-sidebar-light hover:text-white' }}">
                     <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                     Messages
-                    @php $unreadMessages = \App\Models\ContactMessage::unread()->count(); @endphp
+                    @php $unreadMessages = (int) Cache::remember('fiesta.admin.unread', now()->addSeconds(30), fn () => \App\Models\ContactMessage::unread()->count()); @endphp
                     @if ($unreadMessages > 0)
                         <span class="ml-auto rounded-full bg-fuchsia-500 px-2 py-0.5 text-[11px] font-bold text-white">{{ $unreadMessages }}</span>
                     @endif

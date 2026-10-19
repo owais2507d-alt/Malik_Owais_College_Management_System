@@ -168,7 +168,7 @@
 </section>
 
 {{-- Categories band --}}
-<section class="dark:bg-slate-950">
+<section class="border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
     <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div class="reveal">
             <p class="text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-400">Browse by</p>

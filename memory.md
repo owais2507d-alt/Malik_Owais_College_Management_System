@@ -105,10 +105,28 @@
 - [x] Gotcha: `assertSee` doesn't work on streamed responses — use `$response->streamedContent()`
 - [x] Home landing got a `$g` vs `$f['g']` undefined-variable 500 — fixed; **41 tests pass (121 assertions)**, pint clean, build green (109.6 kB css / 107.8 kB js), all pages live-verified 200
 
+## Phase 8 — Performance + Dark-Mode Fixes (2026-10-20)
+
+- [x] **Critical dark fix**: `layouts/app.blade.php` body was `bg-slate-50 text-slate-800` with no dark variants (utilities override @layer base) → added `dark:bg-slate-950 dark:text-slate-200`
+- [x] Collapsed duplicate same-property `dark:` classes across 10 bulk-patched views (bulk regex chaining bug) → verified 0 remaining via property-aware regex
+- [x] `layouts/admin.blade.php` head strip script `document.documentElement.classList.remove('dark')` — admin stays light even if public site set `.dark` (localStorage untouched)
+- [x] `errors/frame.blade.php`: added theme init script + `dark:bg-slate-900/95` card + dark heading/body text
+- [x] Categories band on home restored light styles (`border-t border-slate-200 bg-white`) lost in phase 7 rewrite
+- [x] `app.css` unlayered dark hover overrides for light-only `hover:bg-slate-50/100/white` utilities
+- [x] Pagination: Laravel's default pagination views already ship `dark:` classes — **no fix needed** (verified)
+- [x] **Performance**:
+  - images re-downloaded compressed: hero 155KB→**88KB**, contact 156KB→**97KB** (GD not loaded in CLI → used Unsplash `w/q` params instead)
+  - `<link rel="preload" as="image">` for hero in app layout head
+  - `Cache::remember('fiesta.home.stats', 1min)` in HomeController + `Cache::forget` wired: Admin EventController (3), Admin CategoryController (3), Student RegistrationController (3)
+  - sidebar badges cached: `fiesta.admin.pending`/`fiesta.admin.unread` (30s TTL) in layouts/admin + forgets in Admin RegistrationController (approve/reject), MessageController (markRead/markAllRead/destroy)
+  - `php artisan route:cache` + `view:cache` done (**never `config:cache`/`optimize`** — bakes .env, breaks phpunit sqlite env)
+- [x] Gotcha: PS5.1 `-replace` with complex patterns silently no-ops → verify with `Select-String` counts; typo risk `FacadesCache` import fixed
+- [x] Verify: **41 tests (121 assertions) green**, pint clean (auto-fixed line_ending/ordered_imports on 5 controllers), build green (93.9 kB css / 107.8 kB js), live: admin dark-strip ✓, `/events` `/contact` body dark ✓, 404 frame dark ✓, dupDark=0 on all pages
+
 ## Next Up
 
-1. Push phase 7 to GitHub (origin already configured)
-2. Optional future: admin dark content mode, event gallery, student favorites, email notifications
+1. Commit + push phase 8 to GitHub
+2. Optional future: event gallery, student favorites, email notifications
 
 ## Known Issues / Notes
 

@@ -9,7 +9,7 @@
     <div>
         <p class="text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-400">Student panel</p>
         <h1 class="mt-1 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">My profile</h1>
-        <p class="mt-1 text-slate-500 dark:text-slate-400 dark:text-slate-500">Keep your details up to date so organizers can reach you.</p>
+        <p class="mt-1 text-slate-500 dark:text-slate-400">Keep your details up to date so organizers can reach you.</p>
     </div>
 
     <div class="mt-7 grid gap-6 lg:grid-cols-3">
@@ -19,20 +19,20 @@
                 {{ strtoupper(substr($user->name, 0, 1)) }}
             </span>
             <h2 class="mt-4 text-lg font-bold text-slate-900 dark:text-white">{{ $user->name }}</h2>
-            <p class="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">{{ $user->email }}</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400">{{ $user->email }}</p>
             <span class="badge-upcoming mt-3 capitalize">{{ $user->role }}</span>
 
             <dl class="mt-5 space-y-2 border-t border-slate-100 dark:border-slate-800 pt-4 text-left text-sm">
                 <div class="flex justify-between gap-2">
-                    <dt class="text-slate-500 dark:text-slate-400 dark:text-slate-500">Phone</dt>
+                    <dt class="text-slate-500 dark:text-slate-400">Phone</dt>
                     <dd class="font-medium text-slate-800 dark:text-slate-100">{{ $user->phone ?: '—' }}</dd>
                 </div>
                 <div class="flex justify-between gap-2">
-                    <dt class="text-slate-500 dark:text-slate-400 dark:text-slate-500">Member since</dt>
+                    <dt class="text-slate-500 dark:text-slate-400">Member since</dt>
                     <dd class="font-medium text-slate-800 dark:text-slate-100">{{ $user->created_at->format('M Y') }}</dd>
                 </div>
                 <div class="flex justify-between gap-2">
-                    <dt class="text-slate-500 dark:text-slate-400 dark:text-slate-500">Registrations</dt>
+                    <dt class="text-slate-500 dark:text-slate-400">Registrations</dt>
                     <dd class="font-medium text-slate-800 dark:text-slate-100">{{ $user->registrations()->count() }}</dd>
                 </div>
             </dl>
@@ -42,7 +42,7 @@
             {{-- Personal details --}}
             <div class="card p-6">
                 <h2 class="font-bold text-slate-900 dark:text-white">Personal details</h2>
-                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">Name, email and phone used for event communications.</p>
+                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Name, email and phone used for event communications.</p>
 
                 <form method="POST" action="{{ route('student.profile.update') }}" class="mt-5 space-y-4">
                     @csrf
@@ -82,7 +82,7 @@
             {{-- Password --}}
             <div class="card p-6">
                 <h2 class="font-bold text-slate-900 dark:text-white">Change password</h2>
-                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">Enter your current password, then choose a new one (min 8 characters).</p>
+                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Enter your current password, then choose a new one (min 8 characters).</p>
 
                 <form method="POST" action="{{ route('student.profile.password') }}" class="mt-5 space-y-4">
                     @csrf

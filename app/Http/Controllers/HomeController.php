@@ -6,18 +6,19 @@ use App\Models\Event;
 use App\Models\EventCategory;
 use App\Models\EventRegistration;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class HomeController extends Controller
 {
     public function index(): View
     {
-        $stats = [
+        $stats = Cache::remember('fiesta.home.stats', now()->addMinute(), fn () => [
             'events' => Event::count(),
             'students' => User::where('role', User::ROLE_STUDENT)->count(),
             'registrations' => EventRegistration::where('status', '!=', 'cancelled')->count(),
             'categories' => EventCategory::count(),
-        ];
+        ]);
 
         $highlights = Event::query()
             ->upcoming()

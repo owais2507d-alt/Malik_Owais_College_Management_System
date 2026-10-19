@@ -7,7 +7,7 @@
     <div class="max-w-2xl">
         <p class="text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-400">Fiesta 2026</p>
         <h1 class="mt-1.5 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">Explore events</h1>
-        <p class="mt-2 text-slate-500 dark:text-slate-400 dark:text-slate-500">Search the full calendar, filter by category, and register before deadlines close.</p>
+        <p class="mt-2 text-slate-500 dark:text-slate-400">Search the full calendar, filter by category, and register before deadlines close.</p>
     </div>
 
     {{-- Filters --}}
@@ -68,7 +68,7 @@
                 <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             </span>
             <h2 class="mt-4 text-lg font-semibold text-slate-900 dark:text-white">No events found</h2>
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">Try different search terms or clear your filters.</p>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Try different search terms or clear your filters.</p>
             <a href="{{ route('events.index') }}" class="btn-secondary mt-5 inline-flex">Clear all filters</a>
         </div>
     @else

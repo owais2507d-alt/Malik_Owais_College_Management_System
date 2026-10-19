@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\EventRegistration;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -48,6 +49,7 @@ class RegistrationController extends Controller
         }
 
         $registration->update(['status' => EventRegistration::STATUS_APPROVED]);
+        Cache::forget('fiesta.admin.pending');
 
         return back()->with('status', 'Approved: '.$registration->user?->name.' → '.$registration->event?->title);
     }
@@ -63,6 +65,7 @@ class RegistrationController extends Controller
         }
 
         $registration->update(['status' => EventRegistration::STATUS_REJECTED]);
+        Cache::forget('fiesta.admin.pending');
 
         return back()->with('status', 'Rejected: '.$registration->user?->name.' → '.$registration->event?->title);
     }

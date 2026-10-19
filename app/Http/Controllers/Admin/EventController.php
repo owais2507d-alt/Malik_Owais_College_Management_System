@@ -9,6 +9,7 @@ use App\Models\Event;
 use App\Models\EventCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -55,6 +56,8 @@ class EventController extends Controller
 
         Event::create($data);
 
+        Cache::forget('fiesta.home.stats');
+
         return redirect()
             ->route('admin.events.index')
             ->with('status', 'Event created successfully.');
@@ -92,6 +95,8 @@ class EventController extends Controller
 
         $event->update($data);
 
+        Cache::forget('fiesta.home.stats');
+
         return redirect()
             ->route('admin.events.index')
             ->with('status', 'Event updated successfully.');
@@ -104,6 +109,8 @@ class EventController extends Controller
         }
 
         $event->delete();
+
+        Cache::forget('fiesta.home.stats');
 
         return redirect()
             ->route('admin.events.index')

@@ -12,7 +12,7 @@
             <h1 class="mt-1 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
                 Welcome back, {{ \Illuminate\Support\Str::words($user->name, 1, '') }}
             </h1>
-            <p class="mt-1 text-slate-500 dark:text-slate-400 dark:text-slate-500">Here's what's happening with your Fiesta registrations.</p>
+            <p class="mt-1 text-slate-500 dark:text-slate-400">Here's what's happening with your Fiesta registrations.</p>
         </div>
         <a href="{{ route('events.index') }}" class="btn-primary">
             Browse events
@@ -33,7 +33,7 @@
                     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
                 </span>
                 <p class="mt-3 text-2xl font-bold text-slate-900 dark:text-white">{{ $stat['value'] }}</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">{{ $stat['label'] }}</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400">{{ $stat['label'] }}</p>
             </div>
         @endforeach
     </div>
@@ -49,7 +49,7 @@
 
                 @if ($nextEvents->isEmpty())
                     <div class="px-6 py-10 text-center">
-                        <p class="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">No upcoming events yet.</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">No upcoming events yet.</p>
                         <a href="{{ route('events.index') }}" class="btn-secondary mt-4 inline-flex">Find something fun</a>
                     </div>
                 @else
@@ -64,7 +64,7 @@
                                     </span>
                                     <div class="min-w-0 flex-1">
                                         <a href="{{ route('events.show', $event) }}" class="block truncate text-sm font-semibold text-slate-900 dark:text-white hover:text-brand-600 dark:text-brand-400">{{ $event->title }}</a>
-                                        <p class="truncate text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500">{{ $event->venue }} · {{ \Illuminate\Support\Carbon::parse($event->start_time)->format('g:i A') }}</p>
+                                        <p class="truncate text-xs text-slate-500 dark:text-slate-400">{{ $event->venue }} · {{ \Illuminate\Support\Carbon::parse($event->start_time)->format('g:i A') }}</p>
                                     </div>
                                     <span class="badge-{{ $registration->status }}">{{ ucfirst($registration->status) }}</span>
                                 </li>
@@ -81,7 +81,7 @@
                 <h2 class="font-bold text-slate-900 dark:text-white">Recent activity</h2>
             </div>
             @if ($recent->isEmpty())
-                <p class="px-6 py-8 text-center text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">Nothing here yet — register for your first event.</p>
+                <p class="px-6 py-8 text-center text-sm text-slate-500 dark:text-slate-400">Nothing here yet — register for your first event.</p>
             @else
                 <ul class="divide-y divide-slate-100">
                     @foreach ($recent as $registration)

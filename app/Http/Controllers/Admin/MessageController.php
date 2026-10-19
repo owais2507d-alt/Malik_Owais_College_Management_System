@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ContactMessage;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class MessageController extends Controller
@@ -22,6 +23,7 @@ class MessageController extends Controller
     public function markRead(ContactMessage $message): RedirectResponse
     {
         $message->update(['is_read' => true]);
+        Cache::forget('fiesta.admin.unread');
 
         return back()->with('status', 'Message from "'.$message->name.'" marked as read.');
     }
@@ -29,6 +31,7 @@ class MessageController extends Controller
     public function markAllRead(): RedirectResponse
     {
         ContactMessage::unread()->update(['is_read' => true]);
+        Cache::forget('fiesta.admin.unread');
 
         return back()->with('status', 'All messages marked as read.');
     }
@@ -36,6 +39,7 @@ class MessageController extends Controller
     public function destroy(ContactMessage $message): RedirectResponse
     {
         $message->delete();
+        Cache::forget('fiesta.admin.unread');
 
         return back()->with('status', 'Message deleted.');
     }

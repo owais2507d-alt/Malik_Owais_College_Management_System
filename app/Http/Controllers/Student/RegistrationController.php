@@ -8,6 +8,7 @@ use App\Models\EventRegistration;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class RegistrationController extends Controller
 {
@@ -66,6 +67,8 @@ class RegistrationController extends Controller
                     'registered_at' => now(),
                 ]);
 
+                Cache::forget('fiesta.home.stats');
+
                 return back()->with('status', 'Welcome back! Your registration for "'.$event->title.'" is pending approval.');
             }
 
@@ -83,6 +86,8 @@ class RegistrationController extends Controller
             return back()->with('error', 'You have already registered for "'.$event->title.'".');
         }
 
+        Cache::forget('fiesta.home.stats');
+
         return back()->with('status', 'Registration submitted for "'.$event->title.'" — pending approval.');
     }
 
@@ -95,6 +100,8 @@ class RegistrationController extends Controller
         }
 
         $registration->update(['status' => EventRegistration::STATUS_CANCELLED]);
+
+        Cache::forget('fiesta.home.stats');
 
         return back()->with('status', 'Your registration for "'.$registration->event?->title.'" has been cancelled.');
     }

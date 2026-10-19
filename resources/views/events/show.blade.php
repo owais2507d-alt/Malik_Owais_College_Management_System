@@ -13,7 +13,7 @@
 <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
 
     {{-- Breadcrumb --}}
-    <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">
+    <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
         <a href="{{ route('events.index') }}" class="hover:text-brand-600 dark:text-brand-400">Events</a>
         <span class="text-slate-300">/</span>
         <span class="truncate font-medium text-slate-700 dark:text-slate-200">{{ $event->title }}</span>
@@ -96,7 +96,7 @@
             <div class="card p-6">
                 <div class="flex items-baseline justify-between">
                     <h2 class="font-bold text-slate-900 dark:text-white">Seats</h2>
-                    <p class="text-sm {{ $remaining <= 0 ? 'font-semibold text-rejected-600 dark:text-red-300' : 'text-slate-500 dark:text-slate-400 dark:text-slate-500' }}">
+                    <p class="text-sm {{ $remaining <= 0 ? 'font-semibold text-rejected-600 dark:text-red-300' : 'text-slate-500 dark:text-slate-400' }}">
                         @if ($remaining <= 0)
                             Fully booked
                         @else
@@ -109,7 +109,7 @@
                     <div class="h-full rounded-full {{ $percent >= 100 ? 'bg-rejected-500' : ($percent >= 75 ? 'bg-amber-500' : 'gradient-spectrum') }} transition-all"
                          style="width: {{ $percent }}%"></div>
                 </div>
-                <p class="mt-2 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500">{{ $taken }} of {{ $event->max_participants }} seats filled ({{ $percent }}%)</p>
+                <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">{{ $taken }} of {{ $event->max_participants }} seats filled ({{ $percent }}%)</p>
 
                 <div class="mt-4 space-y-2.5 border-t border-slate-100 dark:border-slate-800 pt-4 text-sm">
                     <p class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
@@ -131,12 +131,12 @@
                 {{-- CTA --}}
                 <div class="mt-5 border-t border-slate-100 dark:border-slate-800 pt-4">
                     @guest
-                        <p class="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">Sign in with your student account to grab a seat.</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Sign in with your student account to grab a seat.</p>
                         <a href="{{ route('login') }}" class="btn-primary mt-3 w-full">Sign in to register</a>
                         <a href="{{ route('register') }}" class="btn-secondary mt-2 w-full">Create an account</a>
                     @else
                         @if (auth()->user()->isAdmin())
-                            <p class="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">You're signed in as an admin — students register for events from their own panel.</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">You're signed in as an admin — students register for events from their own panel.</p>
                         @elseif ($userRegistration)
                             <div class="flex items-center justify-between gap-2">
                                 <div>
@@ -155,7 +155,7 @@
                             </div>
 
                             @if ($userRegistration->status === 'pending')
-                                <p class="mt-3 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500">Waiting for admin approval. You'll see the update in <a href="{{ Route::has('student.registrations.index') ? route('student.registrations.index') : '#' }}" class="font-semibold text-brand-600 dark:text-brand-400">My Registrations</a>.</p>
+                                <p class="mt-3 text-xs text-slate-500 dark:text-slate-400">Waiting for admin approval. You'll see the update in <a href="{{ Route::has('student.registrations.index') ? route('student.registrations.index') : '#' }}" class="font-semibold text-brand-600 dark:text-brand-400">My Registrations</a>.</p>
                             @elseif ($userRegistration->status === 'approved')
                                 <p class="mt-3 text-xs text-approved-600 dark:text-emerald-300">You're in! Arrive at the venue on time with your college ID.</p>
                             @elseif ($userRegistration->status === 'rejected')
@@ -181,13 +181,13 @@
                                 </div>
                             @endif
                         @elseif ($remaining <= 0)
-                            <button type="button" disabled class="btn w-full cursor-not-allowed bg-slate-200 text-slate-500 dark:text-slate-400 dark:text-slate-500">Fully booked</button>
+                            <button type="button" disabled class="btn w-full cursor-not-allowed bg-slate-200 text-slate-500 dark:text-slate-400">Fully booked</button>
                             <p class="mt-2 text-center text-xs text-slate-400 dark:text-slate-500">All {{ $event->max_participants }} seats are taken.</p>
                         @elseif ($deadlinePassed)
-                            <button type="button" disabled class="btn w-full cursor-not-allowed bg-slate-200 text-slate-500 dark:text-slate-400 dark:text-slate-500">Registration closed</button>
+                            <button type="button" disabled class="btn w-full cursor-not-allowed bg-slate-200 text-slate-500 dark:text-slate-400">Registration closed</button>
                             <p class="mt-2 text-center text-xs text-slate-400 dark:text-slate-500">The deadline was {{ $event->registration_deadline->format('M j, Y') }}.</p>
                         @elseif ($event->status !== 'upcoming')
-                            <button type="button" disabled class="btn w-full cursor-not-allowed bg-slate-200 text-slate-500 dark:text-slate-400 dark:text-slate-500">Registration closed</button>
+                            <button type="button" disabled class="btn w-full cursor-not-allowed bg-slate-200 text-slate-500 dark:text-slate-400">Registration closed</button>
                             <p class="mt-2 text-center text-xs text-slate-400 dark:text-slate-500">This event is {{ strtolower($event->status) }}.</p>
                         @else
                             <form method="POST" action="{{ route('student.registrations.store', $event) }}">
@@ -210,7 +210,7 @@
                     </span>
                     <div>
                         <p class="text-sm font-semibold text-slate-900 dark:text-white">Events Committee</p>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500">Fiesta 2026 · {{ $event->category?->name ?? 'College' }}</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Fiesta 2026 · {{ $event->category?->name ?? 'College' }}</p>
                     </div>
                 </div>
             </div>
