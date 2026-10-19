@@ -357,3 +357,9 @@ The final implementation will follow the requirements outlined in this document,
 
 *Document Version: 1.0*
 *Last Updated: 2026*
+
+
+
+- **ongithubrepourl**
+
+git remote add origin https://github.com/owais2507d-alt/Malik_Owais_College_Management_System.git  

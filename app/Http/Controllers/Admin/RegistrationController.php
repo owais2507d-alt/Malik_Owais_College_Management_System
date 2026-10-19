@@ -70,7 +70,7 @@ class RegistrationController extends Controller
     {
         $registrations = $event->registrations()
             ->with('user')
-            ->orderByRaw("FIELD(status, 'pending', 'approved', 'rejected', 'cancelled')")
+            ->orderByRaw("CASE status WHEN 'pending' THEN 1 WHEN 'approved' THEN 2 WHEN 'rejected' THEN 3 ELSE 4 END")
             ->orderByDesc('registered_at')
             ->paginate(15);
 

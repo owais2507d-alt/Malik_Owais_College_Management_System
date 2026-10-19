@@ -81,12 +81,24 @@
 
 ## In Progress
 
-- (none — Phase 4 done, awaiting commit)
+- (none — Phase 5 done, awaiting commit)
+
+## Phase 5 — DONE (this session)
+
+- [x] `app/Console/Commands/UpdateEventStatuses.php` (`events:update-status`): past date→completed, today past end→completed, today between start/end→ongoing, future-date ongoing→upcoming reset; scheduled `everyMinute()` in routes/console.php; LIVE-RAN on MySQL ("2 completed, 0 ongoing")
+- [x] phpunit.xml: switched tests to **sqlite :memory:** (was commented out — would have wiped the demo MySQL DB via RefreshDatabase!); migrations verified sqlite-safe
+- [x] `Admin/RegistrationController` participants ordering: MySQL-only `FIELD()` → portable `CASE status WHEN...` (works on sqlite+MySQL)
+- [x] ExampleTest now uses RefreshDatabase (empty sqlite → HomeController must survive zero rows ✓ null-safe)
+- [x] 4 new test files (PHPUnit classic, factories for data): AuthTest (8: guest redirects, admin/student login landings, wrong pw, role 403s both directions, self-register always student), RegistrationFlowTest (7: register, duplicate, full, deadline, not-upcoming, cancel+reactivate, cannot cancel others), AdminPanelTest (10: dashboard, create, validation errors incl past date/bad time/0 cap, update, soft delete, approve, reject, category guard, category soft-delete, participants page), EventStatusCommandTest (5: future/past/ongoing-today/not-started/reset)
+- [x] Gotcha: categories ALSO soft-delete → `assertDatabaseMissing` fails; use `assertSoftDeleted` (fixed in empty-category test)
+- [x] **php artisan test → 32 passed (84 assertions)**; pint clean; build green
+- [x] Flash keys everywhere are `status` (success) / `error` (failure) — tests assert those
 
 ## Next Up
 
-1. Phase 5: scheduled `events:update-status` command (routes/console.php: upcoming→ongoing on date, ongoing→completed after end_time), feature tests (auth roles, register/cancel rules, admin guards, CRUD validation), pint --test, npm run build
-2. Phase 6: `migrate:fresh --seed` final verify, live end-to-end pass, then ask user for GitHub repo URL → `git remote add origin` + push main
+1. Phase 6: `php artisan migrate:fresh --seed` final verify on MySQL, live end-to-end pass (admin + student + public), git status clean
+2. Ask user for GitHub repo URL → `git remote add origin <url>` + `git push -u origin main` (7 commits ready)
+3. Deliver: demo credentials (admin@fiesta.edu/password; students seeded /password; test.student@fiesta.edu/newpassword123), schedule note (runs via scheduler or `php artisan schedule:work`)
 
 ## Known Issues / Notes
 
