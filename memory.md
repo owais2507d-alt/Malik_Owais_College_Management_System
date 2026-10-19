@@ -7,8 +7,8 @@
 
 ## Current Status
 
-- **Phase:** 3a — Public site (home landing, browse/search events, event details)
-- **Next:** layouts/app navbar+footer, HomeController stats/highlights, EventController index/show, toast flash partial
+- **Phase:** 3b — Student panel (dashboard, my registrations page, profile)
+- **Next:** Student\DashboardController, Student\RegistrationController@index, ProfileController, views, routes in `student.*` group
 
 ## Stack Decisions (locked)
 
@@ -53,10 +53,16 @@
 - [x] `layouts/guest.blade.php` (spectrum split-screen) + styled login/register with Alpine password toggles
 - [x] Smoke-tested live on :8000 — wrong password shows error, admin login → /, guest pages redirect when authed, register creates student row
 - [x] HOME route `/` = HomeController (placeholder view, to be replaced in 3a)
+- [x] `layouts/app.blade.php`: sticky navbar, Alpine mobile menu + user dropdown, footer, `partials/toast` flash
+- [x] Landing page: spectrum hero + floating "next event" card, stats strip, highlights grid, categories band
+- [x] EventController: index (search q + category select + status tabs + paginate 9) / show (slug binding, seats bar, related)
+- [x] `partials/event-card.blade.php` shared component (category gradient, status/seat badges)
+- [x] Registration store/cancel: capacity → deadline → status → duplicate checks, unique-violation catch, cancel→pending re-register
+- [x] LIVE-VERIFIED: search/status/category filters, register toast, duplicate blocked, full blocked, deadline blocked, cancel toast, re-register "Welcome back"
 
 ## In Progress
 
-- Phase 3a: Public site — app layout, landing page, event browse/search, event details
+- Phase 3b: Student panel — dashboard, registrations list, profile
 
 ## Known Issues / Notes
 
@@ -70,3 +76,7 @@
 - PHP closures don't auto-capture vars — use `use ($var)` or arrow `fn()` in seeders/collections
 - `RateLimiter::throttleKey()` does NOT exist — build key manually (`'login:'.sha1(email.'|'.ip)`)
 - PS5.1: `Invoke-WebRequest -MaximumRedirection 0` throws opaque exceptions — test flows by FOLLOWING redirects and reading final ResponseUri
+- Eloquent guesses wrong FK: `EventCategory::events()` MUST declare `hasMany(Event::class, 'category_id')`
+- `Str::word` doesn't exist → use `Str::words($value, $n, $end)`
+- CSRF token rotates after login (session regenerate) — always re-scrape `_token` from a page fetched AFTER auth
+- Flash messages live one request: POST response holds them; re-fetching the page consumes them — assert on the POST's own response body

@@ -21,7 +21,7 @@ class EventCategory extends Model
 
     public function events(): HasMany
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class, 'category_id');
     }
 
     public function activeEvents(): HasMany
