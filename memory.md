@@ -72,16 +72,21 @@
 - [x] `php artisan storage:link` done; all `h-4.5 w-4.5 h-5 w-5` duplicates fixed
 - [x] `npm run build` green (104.6 kB css / 107.4 kB js); `php vendor/bin/pint` auto-fixed 14 files; `php artisan test` 2 passed; / and /admin still 200 after pint
 - Phase 3c COMPLETE — commit as "feat: phase 3c admin panel"
+- [x] Phase 4: styled error pages `errors/frame.blade.php` (shared spectrum shell) + 403/404/419/500 views (guest vs authed buttons, @vite, fiesta branding)
+- [x] `public/favicon.svg` (gradient F tile) linked in all 3 layouts (app/admin/guest)
+- [x] `.env` now `APP_DEBUG=false` — required so 500 renders styled page (403/404/419 render styled regardless of debug; 500 only when debug off; tests unaffected via phpunit.xml). Re-enable for local debugging if needed
+- [x] LIVE-VERIFIED: custom 404 (unknown URL), 403 (student→/admin shows "Sign in" branch), 419 (POST student/registrations/{slug} w/o CSRF), 500 (temp `/__boom` route, exception hidden from output — route removed after test)
+- [x] Consistency: `rel="noopener"` added to target=_blank links (admin registrations list, admin sidebar "View public site"); deleted unused `welcome.blade.php` (no route referenced it); `h-4.5` sweep clean; no dd/dump/TODO leftovers
+- [x] Build green (CSS shrank 104→90 kB after welcome.blade removal), pint clean, all key pages 200 (/, /events, guest /login, /admin admin-session, /student/dashboard student-session; cross-role 403s still correct)
 
 ## In Progress
 
-- (none — 3c done, awaiting commit)
+- (none — Phase 4 done, awaiting commit)
 
 ## Next Up
 
-1. Phase 4: theme polish (event detail/gallery polish, consistency pass) + styled error pages 403/404/500
-2. Phase 5: `events:update-status` scheduled command (routes/console.php), feature tests (auth, register/cancel rules, admin guards, CRUD), pint --test, build
-3. Phase 6: `migrate:fresh --seed` final verify, then ask user for GitHub repo URL → `git remote add origin` + push main
+1. Phase 5: scheduled `events:update-status` command (routes/console.php: upcoming→ongoing on date, ongoing→completed after end_time), feature tests (auth roles, register/cancel rules, admin guards, CRUD validation), pint --test, npm run build
+2. Phase 6: `migrate:fresh --seed` final verify, live end-to-end pass, then ask user for GitHub repo URL → `git remote add origin` + push main
 
 ## Known Issues / Notes
 

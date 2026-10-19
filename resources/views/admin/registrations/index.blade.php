@@ -82,7 +82,7 @@
                             </td>
                             <td class="px-4 py-3.5">
                                 @if ($registration->event)
-                                    <a href="{{ route('events.show', $registration->event) }}" class="font-medium text-slate-800 hover:text-brand-600" target="_blank">
+                                    <a href="{{ route('events.show', $registration->event) }}" class="font-medium text-slate-800 hover:text-brand-600" target="_blank" rel="noopener">
                                         {{ $registration->event->title }}
                                     </a>
                                     <p class="text-xs text-slate-500">{{ $registration->event->event_date->format('M j, Y') }} · {{ $registration->event->venue }}</p>
