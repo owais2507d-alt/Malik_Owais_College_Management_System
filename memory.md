@@ -96,9 +96,9 @@
 
 ## Next Up
 
-1. Phase 6: `php artisan migrate:fresh --seed` final verify on MySQL, live end-to-end pass (admin + student + public), git status clean
-2. Ask user for GitHub repo URL → `git remote add origin <url>` + `git push -u origin main` (7 commits ready)
-3. Deliver: demo credentials (admin@fiesta.edu/password; students seeded /password; test.student@fiesta.edu/newpassword123), schedule note (runs via scheduler or `php artisan schedule:work`)
+1. ~~Phase 6~~ DONE: `migrate:fresh --seed` green (16 users/1 admin, 6 categories, 12 events, 160 regs, FULL demo 10/10 intact); `schedule:run` executes events:update-status; live e2e: public 200s, admin login→approve (302, status approved), student login→register blocked (duplicate rule live), CSRF-after-login + seeded-password gotchas re-confirmed
+2. **ASK USER for GitHub repo URL** → `git remote add origin <url>` + `git push -u origin main` (8 commits ready: phase 0,1,2,3a,3b,3c,4,5)
+3. Deliver notes: admin@fiesta.edu/password; ALL seeded students /password (incl. random emails like orlando88@example.com); **test.student@fiesta.edu does NOT exist post-reseed** (was manual); scheduler needs `php artisan schedule:work` (or cron) to auto-update statuses; APP_DEBUG=false (flip to true for local debugging)
 
 ## Known Issues / Notes
 
