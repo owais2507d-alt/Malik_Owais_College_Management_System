@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source "../**/*.blade.php";
@@ -44,12 +46,20 @@
 }
 
 @layer base {
+    html {
+        color-scheme: light;
+    }
+
+    html.dark {
+        color-scheme: dark;
+    }
+
     body {
-        @apply bg-slate-50 text-slate-800 antialiased;
+        @apply bg-slate-50 text-slate-800 antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-200;
     }
 
     ::selection {
-        @apply bg-brand-500/25 text-brand-950;
+        @apply bg-brand-500/25 text-brand-950 dark:bg-brand-400/30 dark:text-brand-100;
     }
 }
 
@@ -67,6 +77,12 @@
         background-image: linear-gradient(120deg, #6c4ce8 0%, #a855f7 25%, #ec4899 50%, #f59e0b 75%, #14b8a6 100%);
     }
 
+    .gradient-spectrum-animated {
+        background-image: linear-gradient(120deg, #6c4ce8, #a855f7, #ec4899, #f59e0b, #14b8a6, #6c4ce8);
+        background-size: 300% 300%;
+        animation: spectrum-shift 12s ease-in-out infinite;
+    }
+
     .text-spectrum {
         background-image: linear-gradient(100deg, #6c4ce8 0%, #a855f7 30%, #ec4899 60%, #f59e0b 100%);
         -webkit-background-clip: text;
@@ -75,15 +91,15 @@
     }
 
     .card {
-        @apply rounded-2xl border border-slate-200/80 bg-white shadow-sm shadow-slate-200/50;
+        @apply rounded-2xl border border-slate-200/80 bg-white shadow-sm shadow-slate-200/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-slate-950/50;
     }
 
     .btn-primary {
-        @apply btn bg-brand-600 text-white shadow-sm hover:bg-brand-700 focus:ring-brand-500;
+        @apply btn bg-brand-600 text-white shadow-sm hover:bg-brand-700 focus:ring-brand-500 dark:bg-brand-500 dark:hover:bg-brand-400;
     }
 
     .btn-secondary {
-        @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 focus:ring-slate-400;
+        @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 focus:ring-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800;
     }
 
     .btn-danger {
@@ -91,47 +107,149 @@
     }
 
     .btn-ghost {
-        @apply btn text-slate-600 hover:bg-slate-100 focus:ring-slate-300;
+        @apply btn text-slate-600 hover:bg-slate-100 focus:ring-slate-300 dark:text-slate-300 dark:hover:bg-slate-800;
     }
 
     .input {
-        @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 shadow-sm transition focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20;
+        @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 shadow-sm transition focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 dark:focus:border-brand-400 dark:focus:ring-brand-400/25;
     }
 
     .label {
-        @apply mb-1.5 block text-sm font-medium text-slate-700;
+        @apply mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300;
     }
 
     .badge-pending {
-        @apply badge bg-pending-50 text-pending-600 ring-1 ring-pending-500/30;
+        @apply badge bg-pending-50 text-pending-600 ring-1 ring-pending-500/30 dark:bg-pending-500/10 dark:text-amber-400 dark:ring-pending-500/30;
     }
 
     .badge-approved {
-        @apply badge bg-approved-50 text-approved-600 ring-1 ring-approved-500/30;
+        @apply badge bg-approved-50 text-approved-600 ring-1 ring-approved-500/30 dark:bg-approved-500/10 dark:text-emerald-400 dark:ring-approved-500/30;
     }
 
     .badge-rejected {
-        @apply badge bg-rejected-50 text-rejected-600 ring-1 ring-rejected-500/30;
+        @apply badge bg-rejected-50 text-rejected-600 ring-1 ring-rejected-500/30 dark:bg-rejected-500/10 dark:text-red-400 dark:ring-rejected-500/30;
     }
 
     .badge-cancelled {
-        @apply badge bg-cancelled-50 text-cancelled-600 ring-1 ring-cancelled-500/30;
+        @apply badge bg-cancelled-50 text-cancelled-600 ring-1 ring-cancelled-500/30 dark:bg-slate-800 dark:text-slate-400 dark:ring-slate-600/40;
     }
 
     .badge-upcoming {
-        @apply badge bg-brand-50 text-brand-700 ring-1 ring-brand-500/30;
+        @apply badge bg-brand-50 text-brand-700 ring-1 ring-brand-500/30 dark:bg-brand-500/10 dark:text-brand-300 dark:ring-brand-400/30;
     }
 
     .badge-ongoing {
-        @apply badge bg-teal-50 text-teal-700 ring-1 ring-teal-500/30;
+        @apply badge bg-teal-50 text-teal-700 ring-1 ring-teal-500/30 dark:bg-teal-500/10 dark:text-teal-300 dark:ring-teal-500/30;
     }
 
     .badge-completed {
-        @apply badge bg-slate-100 text-slate-600 ring-1 ring-slate-400/30;
+        @apply badge bg-slate-100 text-slate-600 ring-1 ring-slate-400/30 dark:bg-slate-800 dark:text-slate-400 dark:ring-slate-600/40;
     }
 
     .badge-category {
-        @apply badge bg-slate-900/5 text-slate-700 ring-1 ring-slate-900/10;
+        @apply badge bg-slate-900/5 text-slate-700 ring-1 ring-slate-900/10 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-700;
+    }
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes spectrum-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes float-y {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-12px) rotate(-1deg); }
+}
+
+@keyframes blob-morph {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(18px, -22px) scale(1.06); }
+    66% { transform: translate(-14px, 14px) scale(0.95); }
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.75); }
+}
+
+/* Scroll-reveal (IntersectionObserver adds .in-view) */
+.reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.anim-fade-up {
+    animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-fade-in {
+    animation: fade-in 0.8s ease both;
+}
+
+.anim-float {
+    animation: float-y 6s ease-in-out infinite;
+}
+
+.anim-blob {
+    animation: blob-morph 14s ease-in-out infinite;
+}
+
+.anim-dot {
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Shine sweep on hover (buttons / featured cards) */
+.shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.28), transparent);
+    transition: transform 0.7s ease;
+    pointer-events: none;
+}
+
+.shine:hover::after {
+    transform: translateX(120%) skewX(-20deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .anim-fade-up,
+    .anim-fade-in,
+    .anim-float,
+    .anim-blob,
+    .anim-dot {
+        animation: none;
     }
 }
 

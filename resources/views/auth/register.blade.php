@@ -4,11 +4,11 @@
 
 @section('content')
 <div>
-    <h1 class="text-2xl font-bold tracking-tight text-slate-900">Create your account</h1>
-    <p class="mt-1.5 text-sm text-slate-500">Join Fiesta 2026 and register for college events in seconds.</p>
+    <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Create your account</h1>
+    <p class="mt-1.5 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-400">Join Fiesta 2026 and register for college events in seconds.</p>
 
     @if ($errors->any())
-        <div class="mt-5 rounded-lg border border-rejected-500/30 bg-rejected-50 px-4 py-3 text-sm text-rejected-600">
+        <div class="mt-5 rounded-lg border border-rejected-500/30 bg-rejected-50 px-4 py-3 text-sm text-rejected-600 dark:border-rejected-500/30 dark:bg-rejected-500/10 dark:text-red-300">
             {{ $errors->first() }}
         </div>
     @endif
@@ -21,7 +21,7 @@
             <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
                    autocomplete="name" placeholder="Ayesha Khan" class="input">
             @error('name')
-                <p class="mt-1.5 text-xs text-rejected-600">{{ $message }}</p>
+                <p class="mt-1.5 text-xs text-rejected-600 dark:text-red-300">{{ $message }}</p>
             @enderror
         </div>
 
@@ -30,7 +30,7 @@
             <input id="email" type="email" name="email" value="{{ old('email') }}" required
                    autocomplete="username" placeholder="you@college.edu" class="input">
             @error('email')
-                <p class="mt-1.5 text-xs text-rejected-600">{{ $message }}</p>
+                <p class="mt-1.5 text-xs text-rejected-600 dark:text-red-300">{{ $message }}</p>
             @enderror
         </div>
 
@@ -47,7 +47,7 @@
                 </button>
             </div>
             @error('password')
-                <p class="mt-1.5 text-xs text-rejected-600">{{ $message }}</p>
+                <p class="mt-1.5 text-xs text-rejected-600 dark:text-red-300">{{ $message }}</p>
             @enderror
         </div>
 
@@ -56,16 +56,16 @@
             <input id="password_confirmation" type="password" name="password_confirmation" required
                    autocomplete="new-password" placeholder="Repeat your password" class="input">
             @error('password_confirmation')
-                <p class="mt-1.5 text-xs text-rejected-600">{{ $message }}</p>
+                <p class="mt-1.5 text-xs text-rejected-600 dark:text-red-300">{{ $message }}</p>
             @enderror
         </div>
 
         <button type="submit" class="btn-primary w-full">Create account</button>
     </form>
 
-    <p class="mt-6 text-center text-sm text-slate-500">
+    <p class="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
         Already registered?
-        <a href="{{ route('login') }}" class="font-semibold text-brand-600 hover:text-brand-700">Sign in</a>
+        <a href="{{ route('login') }}" class="font-semibold text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300">Sign in</a>
     </p>
 </div>
 @endsection

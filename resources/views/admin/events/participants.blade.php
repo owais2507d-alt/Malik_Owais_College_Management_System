@@ -20,10 +20,16 @@
         </p>
     </div>
 
-    <a href="{{ route('admin.events.edit', $event) }}" class="btn-secondary">
-        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-        Edit event
-    </a>
+    <div class="flex flex-wrap items-center gap-2">
+        <a href="{{ route('admin.events.participants.export', $event) }}" class="btn-secondary">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></svg>
+            Export CSV
+        </a>
+        <a href="{{ route('admin.events.edit', $event) }}" class="btn-secondary">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+            Edit event
+        </a>
+    </div>
 </div>
 
 @php

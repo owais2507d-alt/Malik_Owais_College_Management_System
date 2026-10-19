@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\EventCategory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class EventController extends Controller
@@ -60,5 +61,40 @@ class EventController extends Controller
             ->get();
 
         return view('events.show', compact('event', 'userRegistration', 'related'));
+    }
+
+    public function calendar(Event $event): Response
+    {
+        $escape = fn (string $value): string => str_replace(
+            ['\\', ';', ',', "\n"],
+            ['\\\\', '\;', '\,', '\n'],
+            $value,
+        );
+
+        $start = $event->event_date->format('Ymd').'T'.substr((string) $event->start_time, 0, 8);
+        $end = $event->event_date->format('Ymd').'T'.substr((string) $event->end_time, 0, 8);
+        $now = now()->setTimezone('UTC')->format('Ymd\THis\Z');
+
+        $lines = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Fiesta 2026//College Event Management//EN',
+            'CALSCALE:GREGORIAN',
+            'BEGIN:VEVENT',
+            'UID:event-'.$event->id.'@fiesta.edu',
+            'DTSTAMP:'.$now,
+            'DTSTART:'.$start,
+            'DTEND:'.$end,
+            'SUMMARY:'.$escape($event->title),
+            'DESCRIPTION:'.$escape($event->description),
+            'LOCATION:'.$escape($event->venue),
+            'END:VEVENT',
+            'END:VCALENDAR',
+        ];
+
+        return response(implode("\r\n", $lines)."\r\n", 200, [
+            'Content-Type' => 'text/calendar; charset=utf-8',
+            'Content-Disposition' => 'attachment; filename="'.$event->slug.'.ics"',
+        ]);
     }
 }

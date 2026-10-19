@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Student\DashboardController;
@@ -13,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/{event:slug}/calendar', [EventController::class, 'calendar'])->name('events.calendar');
 Route::get('/events/{event:slug}', [EventController::class, 'show'])->name('events.show');
+
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -45,4 +50,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('registrations', [Admin\RegistrationController::class, 'index'])->name('registrations.index');
     Route::post('registrations/{registration}/approve', [Admin\RegistrationController::class, 'approve'])->name('registrations.approve');
     Route::post('registrations/{registration}/reject', [Admin\RegistrationController::class, 'reject'])->name('registrations.reject');
+    Route::get('events/{event}/participants/export', [Admin\RegistrationController::class, 'export'])->name('events.participants.export');
+
+    Route::get('messages', [Admin\MessageController::class, 'index'])->name('messages.index');
+    Route::post('messages/read-all', [Admin\MessageController::class, 'markAllRead'])->name('messages.read-all');
+    Route::post('messages/{message}/read', [Admin\MessageController::class, 'markRead'])->name('messages.read');
+    Route::delete('messages/{message}', [Admin\MessageController::class, 'destroy'])->name('messages.destroy');
 });

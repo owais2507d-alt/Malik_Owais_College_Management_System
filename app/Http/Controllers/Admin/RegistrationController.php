@@ -8,6 +8,7 @@ use App\Models\EventRegistration;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RegistrationController extends Controller
 {
@@ -77,5 +78,34 @@ class RegistrationController extends Controller
         $taken = $event->seatsTaken();
 
         return view('admin.events.participants', compact('event', 'registrations', 'taken'));
+    }
+
+    public function export(Event $event): StreamedResponse
+    {
+        $filename = $event->slug.'-participants.csv';
+
+        return response()->streamDownload(function () use ($event) {
+            $handle = fopen('php://output', 'w');
+
+            fputcsv($handle, ['Name', 'Email', 'Phone', 'Status', 'Registered At']);
+
+            $event->registrations()
+                ->with('user')
+                ->orderByRaw("CASE status WHEN 'pending' THEN 1 WHEN 'approved' THEN 2 WHEN 'rejected' THEN 3 ELSE 4 END")
+                ->orderByDesc('registered_at')
+                ->each(function (EventRegistration $registration) use ($handle) {
+                    fputcsv($handle, [
+                        $registration->user?->name,
+                        $registration->user?->email,
+                        $registration->user?->phone,
+                        ucfirst($registration->status),
+                        $registration->registered_at->format('Y-m-d H:i'),
+                    ]);
+                });
+
+            fclose($handle);
+        }, $filename, [
+            'Content-Type' => 'text/csv; charset=utf-8',
+        ]);
     }
 }

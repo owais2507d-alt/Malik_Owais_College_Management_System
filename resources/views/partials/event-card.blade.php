@@ -14,10 +14,18 @@
 @endphp
 
 <a href="{{ route('events.show', $event) }}"
-   class="card group flex flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-300/60">
+   class="card group flex flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-300/60 dark:hover:shadow-black/40">
     <div class="relative h-36 overflow-hidden bg-gradient-to-br {{ $gradient }}">
-        <div class="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/20 blur-2xl"></div>
-        <div class="absolute inset-0 bg-black/10"></div>
+        @if ($event->image)
+            <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($event->image) }}"
+                 alt="{{ $event->title }}"
+                 loading="lazy"
+                 class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/20"></div>
+        @else
+            <div class="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/20 blur-2xl"></div>
+            <div class="absolute inset-0 bg-black/10"></div>
+        @endif
 
         <div class="absolute left-3 top-3 flex items-center gap-2">
             <span class="badge bg-white/90 text-slate-800 backdrop-blur">{{ $event->category?->name ?? 'Event' }}</span>
@@ -33,11 +41,11 @@
     </div>
 
     <div class="flex flex-1 flex-col p-4">
-        <h3 class="line-clamp-1 font-semibold text-slate-900 transition group-hover:text-brand-600">
+        <h3 class="line-clamp-1 font-semibold text-slate-900 transition group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-400">
             {{ $event->title }}
         </h3>
 
-        <div class="mt-2 space-y-1.5 text-sm text-slate-500">
+        <div class="mt-2 space-y-1.5 text-sm text-slate-500 dark:text-slate-400">
             <p class="flex items-center gap-2">
                 <svg class="h-4 w-4 shrink-0 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                 {{ \Illuminate\Support\Carbon::parse($event->start_time)->format('g:i A') }} – {{ \Illuminate\Support\Carbon::parse($event->end_time)->format('g:i A') }}
@@ -48,7 +56,7 @@
             </p>
         </div>
 
-        <div class="mt-auto flex items-center justify-between gap-2 border-t border-slate-100 pt-3 text-xs">
+        <div class="mt-auto flex items-center justify-between gap-2 border-t border-slate-100 pt-3 text-xs dark:border-slate-800">
             @if ($remaining <= 0)
                 <span class="badge-rejected">Fully booked</span>
             @elseif ($deadlinePassed && $event->status === 'upcoming')
@@ -56,7 +64,7 @@
             @else
                 <span class="badge-approved">{{ $remaining }} seat{{ $remaining === 1 ? '' : 's' }} left</span>
             @endif
-            <span class="font-semibold text-brand-600 transition group-hover:translate-x-0.5">Details →</span>
+            <span class="font-semibold text-brand-600 transition group-hover:translate-x-0.5 dark:text-brand-400">Details →</span>
         </div>
     </div>
 </a>

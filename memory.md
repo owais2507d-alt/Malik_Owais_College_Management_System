@@ -94,11 +94,21 @@
 - [x] **php artisan test → 32 passed (84 assertions)**; pint clean; build green
 - [x] Flash keys everywhere are `status` (success) / `error` (failure) — tests assert those
 
+## Phase 7 — UI/UX OVERHAUL + NEW FEATURES (this session, pushed)
+
+- [x] **Dark/light theme**: `@custom-variant dark` in app.css; anti-FOUC head script (localStorage `theme` + prefers-color-scheme); Alpine toggle partial `partials/theme-toggle.blade.php`; toggle in public navbar + guest auth pages; full dark: variants on layouts/app, guest, home, contact, events index/show, student views, toast, event-card; admin keeps light content + dark sidebar (by design)
+- [x] **Animations**: CSS keyframes (fade-up/blob/float/pulse/spectrum-shift) + `.reveal` scroll-reveal via IntersectionObserver in app.js (prefers-reduced-motion respected); `.shine` hover sweep; `.anim-float` hero card; animated gradient footer stripe + guest panel
+- [x] **Hero photo**: `public/images/hero-fiesta.jpg` + `contact-team.jpg` (Unsplash, downloaded); hero = photo + overlay + animated blobs; event cards now show real posters when `$event->image` set
+- [x] **Contact end-to-end**: migration `contact_messages` + model + ContactController (throttled 5/5min, validated) + public `/contact` page (info cards + form); Admin MessageController inbox (unread-first, expand, mark read/all, delete) + sidebar link with fuchsia unread badge
+- [x] **New functions**: `.ics` calendar download `GET /events/{slug}/calendar` (button on event page); participants **CSV export** `GET /admin/events/{event}/participants/export` (button on participants page)
+- [x] Gotcha: `response()->streamDownload()` returns **Symfony** StreamedResponse — type-hint Symfony's class not Illuminate's (500 otherwise)
+- [x] Gotcha: `assertSee` doesn't work on streamed responses — use `$response->streamedContent()`
+- [x] Home landing got a `$g` vs `$f['g']` undefined-variable 500 — fixed; **41 tests pass (121 assertions)**, pint clean, build green (109.6 kB css / 107.8 kB js), all pages live-verified 200
+
 ## Next Up
 
-1. ~~Phase 6~~ DONE: `migrate:fresh --seed` green (16 users/1 admin, 6 categories, 12 events, 160 regs, FULL demo 10/10 intact); `schedule:run` executes events:update-status; live e2e: public 200s, admin login→approve (302, status approved), student login→register blocked (duplicate rule live), CSRF-after-login + seeded-password gotchas re-confirmed
-2. **ASK USER for GitHub repo URL** → `git remote add origin <url>` + `git push -u origin main` (8 commits ready: phase 0,1,2,3a,3b,3c,4,5)
-3. Deliver notes: admin@fiesta.edu/password; ALL seeded students /password (incl. random emails like orlando88@example.com); **test.student@fiesta.edu does NOT exist post-reseed** (was manual); scheduler needs `php artisan schedule:work` (or cron) to auto-update statuses; APP_DEBUG=false (flip to true for local debugging)
+1. Push phase 7 to GitHub (origin already configured)
+2. Optional future: admin dark content mode, event gallery, student favorites, email notifications
 
 ## Known Issues / Notes
 
