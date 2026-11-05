@@ -7,7 +7,7 @@
     @foreach ([
         ['label' => 'Total events', 'value' => $stats['events'], 'hint' => 'on the calendar', 'icon' => '<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>', 'class' => 'bg-brand-50 text-brand-600'],
         ['label' => 'Registered students', 'value' => $stats['students'], 'hint' => 'accounts', 'icon' => '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>', 'class' => 'bg-sky-50 text-sky-600'],
-        ['label' => 'Active registrations', 'value' => $stats['registrations'], 'hint' => 'pending + approved', 'icon' => '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>', 'class' => 'bg-teal-50 text-teal-600'],
+        ['label' => 'Active registrations', 'value' => $stats['registrations'], 'hint' => 'pending + approved', 'icon' => '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>', 'class' => 'bg-blue-50 text-blue-600'],
         ['label' => 'Pending approvals', 'value' => $stats['pending'], 'hint' => 'needs your review', 'icon' => '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>', 'class' => 'bg-amber-50 text-amber-600'],
     ] as $stat)
         <div class="card px-5 py-5">

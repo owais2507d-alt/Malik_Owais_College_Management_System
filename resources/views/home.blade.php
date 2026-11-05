@@ -11,13 +11,13 @@
     <div class="absolute inset-0 bg-gradient-to-t from-sidebar via-transparent to-transparent"></div>
 
     <div class="anim-blob absolute -left-32 -top-32 h-96 w-96 rounded-full bg-brand-500/30 blur-3xl"></div>
-    <div class="anim-blob absolute -right-24 top-16 h-80 w-80 rounded-full bg-fuchsia-500/25 blur-3xl" style="animation-delay: -5s"></div>
-    <div class="anim-blob absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-amber-500/15 blur-3xl" style="animation-delay: -9s"></div>
+    <div class="anim-blob absolute -right-24 top-16 h-80 w-80 rounded-full bg-blue-500/25 blur-3xl" style="animation-delay: -5s"></div>
+    <div class="anim-blob absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-sky-400/15 blur-3xl" style="animation-delay: -9s"></div>
 
     <div class="relative mx-auto grid max-w-7xl gap-10 px-4 pb-28 pt-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8 lg:pb-32 lg:pt-24">
         <div>
             <span class="anim-fade-up inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 ring-1 ring-white/20 backdrop-blur">
-                <span class="anim-dot h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+                <span class="anim-dot h-1.5 w-1.5 rounded-full bg-sky-400"></span>
                 International Fiesta 2026
             </span>
 
@@ -150,10 +150,10 @@
 
         <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ([
-                ['t' => 'One-tap register', 'd' => 'Spot an event you love? Claim your seat instantly — approvals land in your dashboard.', 'i' => '<path d="M20 6 9 17l-5-5"/>', 'g' => 'from-violet-500 to-fuchsia-500'],
-                ['t' => 'Live capacity', 'd' => 'Real-time seat counters and deadlines so you never miss out on a full house.', 'i' => '<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>', 'g' => 'from-sky-500 to-indigo-500'],
-                ['t' => 'Track everything', 'd' => 'Pending, approved, rejected — every registration status is one glance away.', 'i' => '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>', 'g' => 'from-teal-500 to-emerald-500'],
-                ['t' => 'Add to calendar', 'd' => 'Download a one-click .ics invite for every event you plan to attend.', 'i' => '<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>', 'g' => 'from-amber-500 to-rose-500'],
+                ['t' => 'One-tap register', 'd' => 'Spot an event you love? Claim your seat instantly — approvals land in your dashboard.', 'i' => '<path d="M20 6 9 17l-5-5"/>', 'g' => 'from-blue-600 to-sky-500'],
+                ['t' => 'Live capacity', 'd' => 'Real-time seat counters and deadlines so you never miss out on a full house.', 'i' => '<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>', 'g' => 'from-sky-600 to-blue-500'],
+                ['t' => 'Track everything', 'd' => 'Pending, approved, rejected — every registration status is one glance away.', 'i' => '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>', 'g' => 'from-blue-700 to-blue-500'],
+                ['t' => 'Add to calendar', 'd' => 'Download a one-click .ics invite for every event you plan to attend.', 'i' => '<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>', 'g' => 'from-blue-500 to-sky-400'],
             ] as $i => $f)
                 <div class="reveal card group p-5 transition hover:-translate-y-1 hover:shadow-lg" style="--reveal-delay: {{ $i * 90 }}ms">
                     <span class="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br {{ $f['g'] }} text-white shadow-md transition group-hover:scale-110">

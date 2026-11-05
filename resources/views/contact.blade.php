@@ -6,7 +6,7 @@
 <section class="relative overflow-hidden border-b border-slate-200 bg-sidebar text-white dark:border-slate-800">
     <img src="{{ asset('images/contact-team.jpg') }}" alt="" class="absolute inset-0 h-full w-full object-cover opacity-25">
     <div class="absolute inset-0 bg-gradient-to-r from-sidebar via-sidebar/85 to-sidebar/40"></div>
-    <div class="anim-blob absolute -right-20 -top-16 h-72 w-72 rounded-full bg-fuchsia-500/25 blur-3xl"></div>
+    <div class="anim-blob absolute -right-20 -top-16 h-72 w-72 rounded-full bg-blue-500/25 blur-3xl"></div>
 
     <div class="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <p class="anim-fade-up text-sm font-semibold uppercase tracking-[0.2em] text-white/70">Get in touch</p>

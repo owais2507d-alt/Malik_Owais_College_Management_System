@@ -123,10 +123,21 @@
 - [x] Gotcha: PS5.1 `-replace` with complex patterns silently no-ops → verify with `Select-String` counts; typo risk `FacadesCache` import fixed
 - [x] Verify: **41 tests (121 assertions) green**, pint clean (auto-fixed line_ending/ordered_imports on 5 controllers), build green (93.9 kB css / 107.8 kB js), live: admin dark-strip ✓, `/events` `/contact` body dark ✓, 404 frame dark ✓, dupDark=0 on all pages
 
+## Phase 9 — Blue & White College-Uniform Theme (2026-11-05)
+
+- [x] Pre-work user-like smoke test: guest (`/`, `/events`, event detail via real slug, `/contact`, login/register, `.ics`, 404) ✓ · student (login → dashboard/registrations/profile → register for event) ✓ · admin (login → dashboard/registrations/events/categories/messages → approve) ✓ · contact POST ✓ — all pass; dev server needed a kill-all-php + clean restart (hung processes), `npm run dev` is running (`public/hot` exists → pages load CSS from Vite dev server :5173, NOT the built bundle)
+- [x] **Design tokens** (`app.css` `@theme`): brand palette violet→**Tailwind blue scale** (`#eff6ff…#172554`, primary `#2563eb`); sidebar violet-navy→**college navy** `#0e1b3d / #14264f / #1c3f7a` — all `brand-*`/`sidebar` utilities update automatically project-wide
+- [x] **Gradients** → blue spectrum: `.gradient-spectrum`, `.gradient-spectrum-animated`, `.text-spectrum` now `#1d4ed8→#93c5fd` shades (hero bars, section ribbons, progress fill, big headings all inherit)
+- [x] **Favicon** → blue gradient (violet/pink/amber removed)
+- [x] **Decorative colors converted** (9 blade files, literal string-replace): hero/section blobs `fuchsia/amber`→`blue/sky`, feature-icon gradients, event-card **6 category gradients** → blue-family pairs (`blue/sky` only, still distinguishable by depth), student/admin stat teal tiles→blue, admin unread badge fuchsia→`bg-brand-500`, promo cards `to-fuchsia`→`to-sky`, avatar gradients `to-fuchsia`→`to-sky`, decorative dots amber→sky
+- [x] **Kept semantic status colors** (intentional): pending amber / approved emerald / rejected red / cancelled slate badges+icons, progress ≥75% amber / ≥100% red, admin pending-count amber badge — 5 remaining `emerald-*` matches are all `dark:text-emerald-300` on approved status ✓
+- [x] Verified: live dev CSS contains `brand-600:#2563eb`, `#0e1b3d`, blue spectrum, **zero** `6c4ce8` violet; home HTML blue refs=22 violetFuchsia=0; favicon blue ✓; `npm run build` green (98.6 kB css); **41 tests green**; `view:cache` re-run after blade edits
+- [x] Note: `@vite` serves dev URLs while `public/hot` exists — fetch CSS from `:5173/resources/css/app.css` to verify (not `/build/…`)
+
 ## Next Up
 
-1. Commit + push phase 8 to GitHub
-2. Optional future: event gallery, student favorites, email notifications
+1. Commit + push phase 9
+2. User has a NEW IDEA to implement next (awaiting details)
 
 ## Known Issues / Notes
 

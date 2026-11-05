@@ -179,7 +179,7 @@
             </div>
         </div>
 
-        <div class="card bg-gradient-to-br from-brand-600 to-fuchsia-600 p-6 text-white">
+        <div class="card bg-gradient-to-br from-brand-600 to-sky-500 p-6 text-white">
             <h3 class="font-bold">Tips</h3>
             <ul class="mt-3 space-y-2 text-sm text-white/85">
                 <li>• Set the deadline before the event date (enforced).</li>

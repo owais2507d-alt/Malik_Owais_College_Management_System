@@ -1,11 +1,11 @@
 @php
     $gradients = [
-        'from-violet-600 via-fuchsia-500 to-rose-500',
-        'from-sky-500 via-indigo-500 to-violet-600',
-        'from-teal-500 via-emerald-500 to-lime-500',
-        'from-amber-500 via-orange-500 to-rose-500',
-        'from-fuchsia-600 via-pink-500 to-rose-500',
-        'from-indigo-600 via-blue-500 to-cyan-500',
+        'from-blue-700 via-blue-600 to-blue-500',
+        'from-sky-600 via-sky-500 to-blue-600',
+        'from-blue-800 via-blue-700 to-blue-600',
+        'from-sky-700 via-sky-600 to-blue-500',
+        'from-blue-600 via-blue-500 to-sky-400',
+        'from-blue-900 via-blue-700 to-sky-500',
     ];
     $gradient = $gradients[($event->category_id ?? 1) % count($gradients)] ?? $gradients[0];
     $taken = $event->active_registrations ?? $event->seatsTaken();

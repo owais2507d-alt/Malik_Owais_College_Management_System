@@ -46,7 +46,7 @@
                 Browse events, register in seconds, and track every approval — all in one place built for campus life.
             </p>
             <div class="mt-8 flex items-center gap-3 text-sm text-white/75">
-                <span class="anim-dot inline-block h-2 w-2 rounded-full bg-amber-300"></span>
+                <span class="anim-dot inline-block h-2 w-2 rounded-full bg-sky-400"></span>
                 {{ \App\Models\Event::upcoming()->count() }} events live on the calendar
             </div>
         </div>

@@ -52,7 +52,7 @@
                 @php $event = $registration->event; @endphp
                 <div class="card p-5 transition hover:shadow-md" x-data="{ confirming: false }">
                     <div class="flex flex-wrap items-start gap-4">
-                        <div class="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-fuchsia-500 text-center text-white">
+                        <div class="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-sky-400 text-center text-white">
                             <span class="text-lg font-bold leading-none">{{ $event?->event_date->format('j') ?? '?' }}</span>
                             <span class="text-[10px] font-semibold uppercase leading-none">{{ $event?->event_date->format('M') ?? '' }}</span>
                         </div>

@@ -26,7 +26,7 @@
             ['label' => 'My registrations', 'value' => $stats['total'], 'class' => 'bg-brand-50 text-brand-600 dark:text-brand-400'],
             ['label' => 'Pending approval', 'value' => $stats['pending'], 'class' => 'bg-pending-50 text-pending-600 dark:text-amber-300'],
             ['label' => 'Approved', 'value' => $stats['approved'], 'class' => 'bg-approved-50 text-approved-600 dark:text-emerald-300'],
-            ['label' => 'Upcoming events', 'value' => $stats['upcoming'], 'class' => 'bg-teal-50 text-teal-600'],
+            ['label' => 'Upcoming events', 'value' => $stats['upcoming'], 'class' => 'bg-blue-50 text-blue-600'],
         ] as $stat)
             <div class="card px-5 py-5">
                 <span class="grid h-9 w-9 place-items-center rounded-lg {{ $stat['class'] }}">

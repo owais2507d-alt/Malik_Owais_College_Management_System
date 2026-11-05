@@ -72,7 +72,7 @@
                     Messages
                     @php $unreadMessages = (int) Cache::remember('fiesta.admin.unread', now()->addSeconds(30), fn () => \App\Models\ContactMessage::unread()->count()); @endphp
                     @if ($unreadMessages > 0)
-                        <span class="ml-auto rounded-full bg-fuchsia-500 px-2 py-0.5 text-[11px] font-bold text-white">{{ $unreadMessages }}</span>
+                        <span class="ml-auto rounded-full bg-brand-500 px-2 py-0.5 text-[11px] font-bold text-white">{{ $unreadMessages }}</span>
                     @endif
                 </a>
             </div>
@@ -127,7 +127,7 @@
                 New event
             </a>
             <div class="hidden h-8 w-px bg-slate-200 sm:block"></div>
-            <span class="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-brand-500 to-fuchsia-500 text-sm font-bold text-white">
+            <span class="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-brand-500 to-sky-400 text-sm font-bold text-white">
                 {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
             </span>
         </div>
