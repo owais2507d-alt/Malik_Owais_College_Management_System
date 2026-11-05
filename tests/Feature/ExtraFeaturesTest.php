@@ -72,6 +72,6 @@ class ExtraFeaturesTest extends TestCase
     public function test_contact_page_and_home_render_with_dark_mode_support(): void
     {
         $this->get(route('contact.show'))->assertOk()->assertSee('Toggle dark mode');
-        $this->get(route('home'))->assertOk()->assertSee('images/hero-fiesta.jpg');
+        $this->get(route('home'))->assertOk()->assertSee('data-hero')->assertSee('from-brand-800');
     }
 }

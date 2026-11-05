@@ -134,10 +134,19 @@
 - [x] Verified: live dev CSS contains `brand-600:#2563eb`, `#0e1b3d`, blue spectrum, **zero** `6c4ce8` violet; home HTML blue refs=22 violetFuchsia=0; favicon blue ✓; `npm run build` green (98.6 kB css); **41 tests green**; `view:cache` re-run after blade edits
 - [x] Note: `@vite` serves dev URLs while `public/hot` exists — fetch CSS from `:5173/resources/css/app.css` to verify (not `/build/…`)
 
+## Phase 10 — Hero Redesign, Stats Spacing, GSAP, Premium Cards (2026-11-05)
+
+- [x] **Hero**: removed background photo (`hero-fiesta.jpg` + overlays + now-unused `<link rel=preload>` in layouts/app) → modern website-style hero: base `from-brand-800 via-brand-900 to-brand-950` gradient + faded 52px grid pattern with radial mask + top-center glow + existing anim-blobs; kept glass "Next up" preview card + spectrum bottom bar
+- [x] **Stats strip**: `gap-3 sm:gap-4` → `gap-5 sm:gap-6`, card padding `px-5 py-5 sm:px-6 sm:py-6`, icon `h-12 w-12 rounded-2xl`, value `text-2xl sm:text-3xl font-black`; dropped `reveal` (GSAP now drives it)
+- [x] **GSAP installed** (`npm install gsap`, JS bundle 108→224 kB / gzip 85 kB): `resources/js/app.js` imports `gsap` + `ScrollTrigger`, respects `prefers-reduced-motion` (skips all GSAP, CSS `.reveal` IO kept for other sections). Animations: `[data-hero]` stagger-in on load (6 elements), `[data-stat]` stagger (delay 0.4s), `[data-gsap-cards] > *` scroll-stagger (y/scale) — used on **home highlights grid + events index grid**
+- [x] **Event card premium upgrade** (`partials/event-card.blade.php`, shared by home/events/show): image box `h-36`→**`h-48`** with 700ms hover zoom; **calendar chip** (white glass: day number black + month + weekday/time) bottom-left; **capacity progress bar** (`h-2`, blue/amber/red by fill %, `x% full` label); body `p-5`, title `text-base font-bold line-clamp-2`, venue icon `text-brand-500`; hover `-translate-y-1.5` + `shadow-xl`; grid gaps `gap-6`
+- [x] Test fix: `ExtraFeaturesTest` asserted old `images/hero-fiesta.jpg` on home → now asserts `data-hero` + `from-brand-800` (41 tests / **122 assertions** green, pint clean, build green)
+- [x] Note: `hero-fiesta.jpg` file still on disk but unused (safe to delete later); home is fully self-contained gradient hero
+
 ## Next Up
 
-1. Commit + push phase 9
-2. User has a NEW IDEA to implement next (awaiting details)
+1. Commit + push phase 10
+2. User's new idea for the project (awaiting details)
 
 ## Known Issues / Notes
 

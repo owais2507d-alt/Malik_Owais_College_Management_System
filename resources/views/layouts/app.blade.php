@@ -21,7 +21,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="preload" as="image" href="{{ asset('images/hero-fiesta.jpg') }}" fetchpriority="high">
 </head>
 <body class="flex min-h-screen flex-col bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-200">
 

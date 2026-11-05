@@ -72,7 +72,7 @@
             <a href="{{ route('events.index') }}" class="btn-secondary mt-5 inline-flex">Clear all filters</a>
         </div>
     @else
-        <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div data-gsap-cards class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($events as $event)
                 @include('partials.event-card', ['event' => $event])
             @endforeach
